@@ -51,4 +51,3 @@ Now Wordle tells you that the 'l' and 'o' are used but in the wrong place. So yo
 
 You're asking for words that end in 'E' and have 'o' and 'l' somewhere in them not at the positions
 shown. Now we're down to 10 words. Keep going until you solve it!
-
