@@ -5,8 +5,8 @@ Python script that helps you choose words for Wordle and other similar word game
 
 `python words.py .Ei.. --no=cdu`
 
-Look for words where 'E' is in position 2, 'i' is anywhere
-but position 3, and letters 'c', 'd', 'u' do not exist
+Look for words where 'E' is in position 2, 'i' is somewhere but not 
+in position 3, and letters 'c', 'd', 'u' do not exist
 
 `python words.py LEyfa --no=x`
 
@@ -17,7 +17,7 @@ but not in the positions shown, and do not contain 'x' anywhere
 
 Uses three patterns to describe the following:
 * Word contains 'RI' in positions 2 and 3.
-* Word has an 'r' and an 'n', but neither is in position 5
+* Word has an 'r' and an 'n', but neither is in position 5 (Note that this does not mean there is a second 'r'. There might be, but the "no 'r' in position 5" pattern could be entirely redundant with the 'R' in position 2.)
 This could have been compressed to two patterns:
 `.RI..n,....r`
 
@@ -46,8 +46,12 @@ From that list, you pick "solid".
 
 Now Wordle tells you that the 'l' and 'o' are used but in the wrong place. So you run again:
 
+`python words.py ....E,.ol.. --no=cratsid`
+
+or you could have combined the patterns:
+
 `python words.py .ol.E --no=cratsid`
 
-You're asking for words that end in 'E' and have 'o' and 'l' somewhere in them not at the positions
-shown. Now we're down to 10 words. Keep going until you solve it!
+Either way, you're asking for words that end in 'E' and have 'o' and 'l' somewhere in them not at the positions
+shown. Now you're down to 10 words. Keep going until you solve it!
 
