@@ -23,35 +23,44 @@ This could have been compressed to two patterns:
 
 ## Scenario
 
-Let's say the word to guess is GLOVE and you guess 'crate' first.
+Let's say the word to guess is `GLOVE` and you guess `crate` first.
 You'll get Wordle's response that the 'e' is correct. If you now want
 to see what words remain, you would run this:
 
-`python words.py ....E --no=crat`
+`python words.py ....E --no=crate`
 
-You'll get over 300 possible words. But you also find out that the top letters used in
-those 300+ words are:
-* o:143
-* i:141
-* l:121
-* s:116
-* n:92
+First, note that you specified 'e' in the 'no' list. Words.py will remove that 'e' because there
+is already an 'e' in the patterns. It would do the same thing if there were an 'e' in the 'yes'
+list. This allows you to type your Wordle guesses in full in the 'no' list of letters without
+having to cull the correct letters.
 
-So your next guess should use as many of those letters as possible. How do you find a good word?
+In our example, there are over 300 possible words that fit the arguments you passed in, so you get the message that there are too
+many words to print. But you also get suggestions for the next word that are based on the
+letters you have no guessed yet. These letters are _silnudymphbgkwfvzjxq_ and are listed in order
+of how commonly they appear in the word list.
 
-`python words.py --yes=oils`
+Your suggestions are:
+`lysin lindy sylid nidus idyls unsly unlid indyl linds dinus`
 
-This says to tell you all 5 letter words that contain all of 'o', 'i', 'l', 's' in any order.
-From that list, you pick "solid".
+While these are indeed words in our giant 14K word list, most of them probably won't be
+accepted by Wordle, Quardle, or other similar games. So let's pick one that will work: `idyls`
 
-Now Wordle tells you that the 'l' and 'o' are used but in the wrong place. So you run again:
+Wordle now tells you that there is an 'l', just not in position 4, so you run again:
 
-`python words.py ....E,.ol.. --no=cratsid`
+`python words.py ....E,...l. --no=createidyls`
 
 or you could have combined the patterns:
 
-`python words.py .ol.E --no=cratsid`
+`python words.py ...lE --no=createidyls`
 
-Either way, you're asking for words that end in 'E' and have 'o' and 'l' somewhere in them not at the positions
-shown. Now you're down to 10 words. Keep going until you solve it!
+There are still too many valid words to guess. So let's try another guess from the
+list of suggestions: `gumbo`. Now we have a 'G' in the right place and an 'o' in
+the wrong place.
+
+`python words.py G..lE,....o --no=createidylsgumbo`
+
+Finally, we get a word list that we can work with:
+`glove gloze golee goloe golpe`
+
+The only _normal_ word is `glove`, so we guess it, and bam! Solved it in 4 guesses!
 
